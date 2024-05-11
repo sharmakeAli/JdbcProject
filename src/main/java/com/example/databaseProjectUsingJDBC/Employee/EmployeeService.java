@@ -13,11 +13,36 @@ public class EmployeeService {
         this.jdbcTemplate = jdbcTemplate;
     }
 
+ //jdbcTemplate.query
+
+//    public List<Employee> getAllEmployees() {
+//        String sql = "SELECT * FROM Employee";
+//        return jdbcTemplate.query(sql, (rs, rowNum) ->
+//                new Employee(
+//                        rs.getLong("id"),
+//                        rs.getString("name"),
+//                        rs.getString("position"),
+//                        rs.getBigDecimal("salary")
+//                ));
+//    }
+
+    // jdbcTemplate.query
+//    public Employee getEmployeeById(Long id) {
+//        String sql = "SELECT * FROM Employee WHERE id = ?";
+//        return jdbcTemplate.queryForObject(sql, new Object[]{id}, (rs, rowNum) ->
+//                new Employee(
+//                        rs.getLong("id"),
+//                        rs.getString("name"),
+//                        rs.getString("position"),
+//                        rs.getBigDecimal("salary")
+//                ));
+//    }
+   // BeanPropertyRowMapper
     public List<Employee> getAllEmployees() {
         String sql = "SELECT * FROM Employee";
         return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Employee.class));
     }
-
+// BeanPropertyRowMapper
     public Employee getEmployeeById(Long id) {
         String sql = "SELECT * FROM Employee WHERE id = ?";
         return jdbcTemplate.queryForObject(sql, new Object[]{id}, new BeanPropertyRowMapper<>(Employee.class));
